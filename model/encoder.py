@@ -119,7 +119,7 @@ class BertPolyDssmModel(BertPreTrainedModel):
     responses_vec = dot_attention(poly_codes, state_vecs, state_vecs, responses_input_masks, self.dropout)
     responses_vec = responses_vec.view(batch_size, res_cnt, -1)
 
-    ## 这里先norm一下，相当于以某种方式得到了context_vec和response_vec
+    ## Here's the form first, which is equivalent to getting CONEXT_vec and RESPONSE_vec in some way.
     context_vecs = self.context_fc(self.dropout(context_vecs))
     context_vecs = F.normalize(context_vecs, 2, -1)  # [bs, m, dim]
     responses_vec = self.response_fc(self.dropout(responses_vec))
